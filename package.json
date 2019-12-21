@@ -1,0 +1,30 @@
+{
+  "name": "account_management",
+  "version": "1.0.0",
+  "description": "This module creates a profile and a wallet for each user and manages all interactions with these two entities.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memmojtaba/AccountManagement.git"
+  },
+  "author": "Mojtaba Miraghajanian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/memmojtaba/AccountManagement/issues"
+  },
+  "homepage": "https://github.com/memmojtaba/AccountManagement#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.1",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
