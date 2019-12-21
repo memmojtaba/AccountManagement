@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const heartbeatRoutes = require('./api/routes/heartbeat');
 const profileRoutes = require('./api/routes/profiles');
+const walletRoutes = require('./api/routes/wallets');
 
 //Logging middleware
 app.use(morgan('dev'));
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 //Routes which should handle requests
 app.use('/account/heartbeat', heartbeatRoutes);
 app.use('/account/profile', profileRoutes);
+app.use('/account/wallet', walletRoutes);
 
 //Connect to MongoDB with mongoose
 const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
