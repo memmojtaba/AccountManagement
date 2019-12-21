@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Profile = require('../models/profile');
-const deleteUser = require('../middlewares/delete-user');
+const Wallet = require('../models/wallet');
 
 exports.profiles_create_profile = (req, res, next) => {
     const profile = new Profile({
@@ -29,6 +29,23 @@ exports.profiles_create_profile = (req, res, next) => {
                 message: err.message
             });
             console.log(req.token);
+        });
+
+    const wallet = new Wallet({
+        _id: new mongoose.Types.ObjectId(),
+        profileID: profile.id,
+        value: 0
+    });
+    wallet
+        .save()
+        .then(result => {
+            console.log(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
         });
 }
 
