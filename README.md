@@ -6,7 +6,7 @@ This is a RESTful Account Management Service written in Node.js with Mongo datab
 In order to run this as a service and probably develop on top of it, you’ll need a to do the followings:
 * Install [node.js](https://nodejs.org/en/) and [mongoDB](https://www.mongodb.com/)
 * Clone the repository and `cd` to the cloned repository
-* Set environment variables in `nodemon.json` (for development) or `.env` (for application)
+* Set environment variables in `.env`
   * `HOST` : Address of Host (e.g., Public IP)
   * `EFFECTIVE_HOST` : Address of Host (e.g., Private IP)
   * `PORT` : Working port of WebServer
