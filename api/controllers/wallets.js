@@ -21,7 +21,7 @@ exports.wallets_get_wallet = (req, res, next) => {
                             });
                         } else {
                             res.status(404).json({
-                                message: 'No valid content for provided ID.'
+                                message: 'Invalid parameters.'
                             });
                         }
                     })
@@ -31,7 +31,7 @@ exports.wallets_get_wallet = (req, res, next) => {
                     });
             } else {
                 res.status(404).json({
-                    message: 'No valid content for provided ID.'
+                    message: 'Invalid parameters.'
                 });
             }
         })
