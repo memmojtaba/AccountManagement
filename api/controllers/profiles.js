@@ -7,7 +7,6 @@ exports.profiles_create_profile = (req, res, next) => {
     const profile = new Profile({
         _id: new mongoose.Types.ObjectId(),
         email: req.body.email,
-        password: req.body.password,
         name: req.body.name,
         phoneNo: req.body.phoneNo,
         nationalCode: req.body.nationalCode,
