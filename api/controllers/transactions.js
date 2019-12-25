@@ -7,15 +7,15 @@ exports.transactions_get_transaction = (req, res, next) => {
     Profile.find({ 'email': req.email })
         .select('_id')
         .exec()
-        .then(doc => {
-            console.log('Found From profile: ' + doc[0]);
-            if (doc) {
-                Transaction.find({profileID: doc[0]._id})
+        .then(profile => {
+            console.log('Found From profile: ' + profile[0]);
+            if (profile) {
+                Transaction.find({ profileID: profile[0]._id })
                     .select('_id profileID createdAt modifiedAt amount orderID statusCode refID')
                     .exec()
                     .then(transactions => {
                         console.log('Found From transaction: ' + transactions);
-                        if (transactions){
+                        if (transactions) {
                             res.status(200).json(transactions);
                         } else {
                             res.status(404).json({
@@ -25,8 +25,8 @@ exports.transactions_get_transaction = (req, res, next) => {
                     })
                     .catch(err => {
                         console.log(err);
-                        res.status(500).json({ 
-                            message: 'Internal server error' 
+                        res.status(500).json({
+                            message: 'Internal server error'
                         });
                     });
             } else {
@@ -37,8 +37,81 @@ exports.transactions_get_transaction = (req, res, next) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ 
-                message: 'Internal server error' 
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+}
+
+exports.transactions_insert_transaction = (req, res, next) => {
+    Profile.find({ 'email': req.email })
+        .select('_id')
+        .exec()
+        .then(profile => {
+            console.log('Found From profile: ' + profile[0]);
+            if (profile) {
+                var transaction = new Transaction({
+                    _id: new mongoose.Types.ObjectId(),
+                    profileID: profile[0]._id,
+                    createdAt: new Date().getTime(),
+                    amount: '10000', //from Trade Management service (orderID)
+                    orderID: req.body.orderID
+                });
+                transaction
+                    .save()
+                    .then(result => {
+                        console.log(result);
+                        if (result) {
+                            req.transactionID = transaction._id;
+                            next();
+                        } else {
+                            res.status(404).json({
+                                message: 'Invalid parameters.'
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            message: 'Internal server error'
+                        });
+                    });
+            } else {
+                res.status(404).json({
+                    message: 'Invalid parameters.'
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+}
+exports.transactions_update_transaction = (req, res, next) => {
+    var updateOps = {
+        modifiedAt: new Date().getTime(),
+        statusCode: req.paymentStatus,
+        refID: req.paymentRefID
+    }
+    console.log(updateOps);
+    Transaction.updateOne({ _id: req.params.transactionID }, { $set: updateOps })
+        .exec()
+        .then(result => {
+            console.log(result);
+            if (result) {
+                next();
+            } else {
+                res.status(404).json({
+                    message: 'Invalid parameters.'
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                message: 'Internal server error'
             });
         });
 }
