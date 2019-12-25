@@ -88,10 +88,10 @@ exports.profiles_get_profile = (req, res, next) => {
     Profile.find({ 'email': req.email })
         .select('_id email name phoneNo nationalCode address postalCode')
         .exec()
-        .then(doc => {
-            console.log('From database:' + doc[0]);
-            if (doc) {
-                res.status(200).json(doc[0]);
+        .then(profile => {
+            console.log('From database:' + profile[0]);
+            if (profile) {
+                res.status(200).json(profile[0]);
             } else {
                 res.status(404).json({
                     message: 'No valid content for provided ID.'

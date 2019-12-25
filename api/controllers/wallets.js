@@ -7,10 +7,10 @@ exports.wallets_get_wallet = (req, res, next) => {
     Profile.find({ 'email': req.email })
         .select('_id')
         .exec()
-        .then(doc => {
-            console.log('From database:' + doc[0]);
-            if (doc) {
-                Wallet.find({profileID: doc[0]._id})
+        .then(profile => {
+            console.log('Profile: ' + profile[0]);
+            if (profile) {
+                Wallet.find({profileID: profile[0]._id})
                     .select('value')
                     .exec()
                     .then(val => {
