@@ -8,6 +8,7 @@ const heartbeatRoutes = require('./api/routes/heartbeat');
 const profileRoutes = require('./api/routes/profiles');
 const walletRoutes = require('./api/routes/wallets');
 const transactionRoutes = require('./api/routes/transactions');
+const paymentRoutes = require('./api/routes/payments');
 
 //Logging middleware
 app.use(morgan('dev'));
@@ -35,6 +36,7 @@ app.use('/account/heartbeat', heartbeatRoutes);
 app.use('/account/profile', profileRoutes);
 app.use('/account/wallet', walletRoutes);
 app.use('/account/transaction', transactionRoutes);
+app.use('/account/pay', paymentRoutes);
 
 //Connect to MongoDB with mongoose
 const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
