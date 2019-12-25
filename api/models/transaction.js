@@ -8,7 +8,7 @@ const transactionSchema = mongoose.Schema({
     amount: { type: Number, required: true },
     orderID: { type: mongoose.Schema.Types.ObjectId, required: true },
     statusCode: String,
-    refID: mongoose.Schema.Types.ObjectId,
+    refID: String,
 });
 
 module.exports = mongoose.model('Transaction', transactionSchema);
