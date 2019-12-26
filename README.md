@@ -93,11 +93,33 @@ HTTP Method|GET
 
 -----
 ### Make a Payment
-This is used to make a payment by calling the Zarinpal payment gateway. The acquired token must be provided in Authorization header as `Bearer Token`.
+This is used to make a payment by calling the Zarinpal payment gateway and then redirect the user to the payment page. The acquired token must be provided in Authorization header as `Bearer Token`.
 
 HTTP Method|POST
 :-----|:-----
 **URL**|/account/pay
 **Request Body**|{<br /> &emsp;**"orderID":**&emsp;"A VALID ORDER ID",<br />}
 **Response OK**|**302** MOVED TEMPORARILY
+**Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
+
+-----
+### Payment Callback
+This is used to return to Account Management Service from the payment gateway. This link contains `Authority` and `Status` Query Parameters.
+
+HTTP Method|POST
+:-----|:-----
+**URL**|/account/pay/callback
+**Request Body**|empty
+**Response OK**|**200** OK
+**Response Error**|**400** Invalid Parameters<br />**500** Internal Server Error
+
+-----
+### Get a List of Transactions
+This is used to get a list of all transactions of a profile. The acquired token must be provided in Authorization header as `Bearer Token`.
+
+HTTP Method|POST
+:-----|:-----
+**URL**|/account/transaction
+**Request Body**|empty
+**Response OK**|**200** OK
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
