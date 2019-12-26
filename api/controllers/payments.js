@@ -1,3 +1,6 @@
+const Wallet = require('../models/wallet');
+const Transaction = require('../models/transaction');
+
 exports.payments_zarinpal_payment = (req, res, next) => {
     try {
         var paymentLink = 'https://sandbox.zarinpal.com/pg/StartPay/' + req.paymentAuthority;
