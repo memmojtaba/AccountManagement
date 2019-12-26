@@ -8,7 +8,7 @@ exports.wallets_get_wallet = (req, res, next) => {
         .select('_id')
         .exec()
         .then(doc => {
-            console.log('From database:' + doc[0]);
+            console.log('Found from Wallet:' + doc[0]);
             if (doc) {
                 Wallet.find({profileID: doc[0]._id})
                     .select('value')

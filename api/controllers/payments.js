@@ -1,3 +1,6 @@
+const Wallet = require('../models/wallet');
+const Transaction = require('../models/transaction');
+
 exports.payments_zarinpal_payment = (req, res, next) => {
     try {
         var paymentLink = 'https://sandbox.zarinpal.com/pg/StartPay/' + req.paymentAuthority;
@@ -5,7 +8,7 @@ exports.payments_zarinpal_payment = (req, res, next) => {
         res.redirect(paymentLink);
     } catch (error) {
         res.status(500).json({
-            message: 'Internal server error'
+            message: 'Internal Server Error'
         });
     }
 }
@@ -16,7 +19,7 @@ exports.payments_callback_payment = (req, res, next) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({
-            message: 'Internal server error'
+            message: 'Internal Server Error'
         });
     }
 }
