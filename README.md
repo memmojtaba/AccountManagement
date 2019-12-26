@@ -58,7 +58,6 @@ HTTP Method|POST
 **Response OK**|**201** CREATED<br />{<br /> &emsp;**token:**&emsp;"A VALID AUTHORIZATION TOKEN"<br />}
 **Response Error**|**400** Invalid Parameters<br />**409** Email Already Exists<br />**500** Internal Server Error
 
-
 -----
 ### Update a Profile
 This is used to update a profile. The acquired token must be provided in Authorization header as `Bearer Token`.
@@ -70,14 +69,57 @@ HTTP Method|PUT
 **Response OK**|**200** OK<br />{<br /> &emsp;**"\_id":**&emsp;"PROFILE ID",<br /> &emsp;**"email":**&emsp;"AN EMAIL",<br /> &emsp;**"name":**&emsp;"A NAME",<br /> &emsp;**"phoneNo":**&emsp;"A PHONE NUMBER",<br /> &emsp;**"nationalCode":**&emsp;"A NATIONAL CODE",<br /> &emsp;**"address":**&emsp;"AN ADDRESS",<br /> &emsp;**"postalCode":**&emsp;"A POSTAL CODE"<br />}
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
 
-
 -----
 ### Get a Profile
-This is used to show a profile. The acquired token must be provided in Authorization header as `Bearer Token`.
+This is used to get a profile. The acquired token must be provided in Authorization header as `Bearer Token`.
 
 HTTP Method|GET
 :-----|:-----
 **URL**|/account/profile
 **Request Body**|empty
 **Response OK**|**200** OK<br />{<br /> &emsp;**"\_id":**&emsp;"PROFILE ID",<br /> &emsp;**"email":**&emsp;"AN EMAIL",<br /> &emsp;**"name":**&emsp;"A NAME",<br /> &emsp;**"phoneNo":**&emsp;"A PHONE NUMBER",<br /> &emsp;**"nationalCode":**&emsp;"A NATIONAL CODE",<br /> &emsp;**"address":**&emsp;"AN ADDRESS",<br /> &emsp;**"postalCode":**&emsp;"A POSTAL CODE"<br />}
+**Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
+
+-----
+### Get a Wallet Value
+This is used to get a wallet value of the profile. The acquired token must be provided in Authorization header as `Bearer Token`.
+
+HTTP Method|GET
+:-----|:-----
+**URL**|/account/wallet
+**Request Body**|empty
+**Response OK**|**200** OK<br />{<br /> &emsp;**"value":**&emsp;"WALLET VALUE",<br />}
+**Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
+
+-----
+### Make a Payment
+This is used to make a payment by calling the Zarinpal payment gateway and then redirect the user to the payment page. The acquired token must be provided in Authorization header as `Bearer Token`.
+
+HTTP Method|POST
+:-----|:-----
+**URL**|/account/pay
+**Request Body**|{<br /> &emsp;**"orderID":**&emsp;"A VALID ORDER ID",<br />}
+**Response OK**|**302** MOVED TEMPORARILY
+**Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
+
+-----
+### Payment Callback
+This is used to return to Account Management Service from the payment gateway. This link contains `Authority` and `Status` Query Parameters.
+
+HTTP Method|POST
+:-----|:-----
+**URL**|/account/pay/callback
+**Request Body**|empty
+**Response OK**|**200** OK
+**Response Error**|**400** Invalid Parameters<br />**500** Internal Server Error
+
+-----
+### Get a List of Transactions
+This is used to get a list of all transactions of a profile. The acquired token must be provided in Authorization header as `Bearer Token`.
+
+HTTP Method|POST
+:-----|:-----
+**URL**|/account/transaction
+**Request Body**|empty
+**Response OK**|**200** OK
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
