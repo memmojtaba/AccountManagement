@@ -46,8 +46,13 @@ mongoose.connect(connectionString,
         useUnifiedTopology: true,
         useNewUrlParser: true,
         // useMongoClient: true
-    }
-);
+    })
+    .catch(err => {
+        res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    })
+    
 mongoose.Promise = global.Promise;
 console.log(connectionString);
 //Error handling

@@ -18,14 +18,13 @@ exports.profiles_create_profile = (req, res, next) => {
         .then(result => {
             console.log(result);
             res.status(201).json({
-                // message: "saved successfully.",
                 token: req.token
             });
         })
         .catch(err => {
             console.log(err);
-            res.status(401).json({
-                message: err.message
+            res.status(500).json({
+                message: 'Internal Server Error'
             });
             console.log(req.token);
         });
@@ -43,7 +42,7 @@ exports.profiles_create_profile = (req, res, next) => {
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                message: 'Internal server error'
+                message: 'Internal Server Error'
             });
         });
 }
@@ -59,7 +58,7 @@ exports.profiles_update_profile = (req, res, next) => {
     }
     if (invalid === true) {
         res.status(400).json({
-            message: 'Invalid parameters.'
+            message: 'Invalid Parameters'
         });
         return;
     }
@@ -79,7 +78,7 @@ exports.profiles_update_profile = (req, res, next) => {
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                message: 'Internal server error'
+                message: 'Internal Server Error'
             });
         });
 }
@@ -94,12 +93,14 @@ exports.profiles_get_profile = (req, res, next) => {
                 res.status(200).json(profile[0]);
             } else {
                 res.status(404).json({
-                    message: 'No valid content for provided ID.'
+                    message: 'Email Not Found'
                 });
             }
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ message: 'Internal server error' });
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
         });
 }
