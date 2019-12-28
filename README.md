@@ -5,7 +5,7 @@ This is a RESTful Account Management Service written in Node.js with Mongo datab
 ## Setting up As a Service
 In order to run this as a service and probably develop on top of it, you’ll need a to do the followings:
 * Install [node.js](https://nodejs.org/en/) and [mongoDB](https://www.mongodb.com/)
-* Clone the repository and `cd` to the cloned repository
+* Clone the repository and `cd` into the cloned repository
 * Set environment variables in `.env`
   * `HOST` : Address of Host (e.g., Public IP)
   * `EFFECTIVE_HOST` : Address of Host (e.g., Private IP)
@@ -117,9 +117,9 @@ HTTP Method|POST
 ### Get a List of Transactions
 This is used to get a list of all transactions of a profile. The acquired token must be provided in Authorization header as `Bearer Token`.
 
-HTTP Method|POST
+HTTP Method|GET
 :-----|:-----
 **URL**|/account/transaction
 **Request Body**|empty
-**Response OK**|**200** OK
+**Response OK**|**200** OK<br />[<br />&emsp;{<br /> &emsp;&emsp;**"\_id":**&emsp;&emsp;"TRANSACTION ID",<br /> &emsp;&emsp;**"profileID":**&emsp;&emsp;"PROFILE ID",<br /> &emsp;&emsp;**"createdAt":**&emsp;&emsp;"CREATION DATE",<br /> &emsp;&emsp;**"modifiedAt":**&emsp;&emsp;"LAST MODIFICATION DATE",<br /> &emsp;&emsp;**"amount":**&emsp;&emsp;"BALANCE",<br /> &emsp;&emsp;**"orderID":**&emsp;&emsp;"ORDER ID",<br /> &emsp;&emsp;**"statusCode":**&emsp;&emsp;"PAYMENT STATUS CODE",<br /> &emsp;&emsp;**"refID":**&emsp;&emsp;"PAYMENT REFERENCE ID"<br />&emsp;},...<br />]
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
