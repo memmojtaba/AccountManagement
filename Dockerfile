@@ -4,10 +4,10 @@ MAINTAINER mem.mojtaba@gmail.com
 
 WORKDIR /app
 
-COPY ./source/package.json .
+COPY ./package.json .
 RUN npm install --silent
 
-COPY ./source/ .
+COPY . .
 RUN npm run build
 
 From node:13.5.0-alpine as runtime
