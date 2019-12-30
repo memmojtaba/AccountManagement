@@ -21,8 +21,8 @@ module.exports = (req, res, next) => {
                 next();
 
             } else {
-                console.log(resp);
-                res.status(resp.statusCode).json(body);
+                 console.log(body);
+                res.status(resp.statusCode).json(JSON.parse(body));
             }
         });
 
