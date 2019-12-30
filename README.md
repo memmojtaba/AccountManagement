@@ -8,7 +8,6 @@ In order to run this as a service and probably develop on top of it, you’ll ne
 * Clone the repository and `cd` into the cloned repository
 * Set environment variables in `.env`
   * `HOST` : Address of Host (e.g., Public IP)
-  * `EFFECTIVE_HOST` : Address of Host (e.g., Private IP)
   * `PORT` : Working port of WebServer
   * `AUTH_SERVER_ADDR` : Address of Authentication Service (e.g., Name of service in the container)
   * `AUTH_SERVER_PORT` : Working port of Authentication Service
