@@ -8,7 +8,6 @@ In order to run this as a service and probably develop on top of it, you’ll ne
 * Clone the repository and `cd` into the cloned repository
 * Set environment variables in `.env`
   * `HOST` : Address of Host (e.g., Public IP)
-  * `EFFECTIVE_HOST` : Address of Host (e.g., Private IP)
   * `PORT` : Working port of WebServer
   * `AUTH_SERVER_ADDR` : Address of Authentication Service (e.g., Name of service in the container)
   * `AUTH_SERVER_PORT` : Working port of Authentication Service
@@ -121,5 +120,5 @@ HTTP Method|GET
 :-----|:-----
 **URL**|/account/transaction
 **Request Body**|empty
-**Response OK**|**200** OK<br />[<br />&emsp;{<br /> &emsp;&emsp;**"\_id":**&emsp;&emsp;"TRANSACTION ID",<br /> &emsp;&emsp;**"profileID":**&emsp;&emsp;"PROFILE ID",<br /> &emsp;&emsp;**"createdAt":**&emsp;&emsp;"CREATION DATE",<br /> &emsp;&emsp;**"modifiedAt":**&emsp;&emsp;"LAST MODIFICATION DATE",<br /> &emsp;&emsp;**"amount":**&emsp;&emsp;"BALANCE",<br /> &emsp;&emsp;**"orderID":**&emsp;&emsp;"ORDER ID",<br /> &emsp;&emsp;**"statusCode":**&emsp;&emsp;"PAYMENT STATUS CODE",<br /> &emsp;&emsp;**"refID":**&emsp;&emsp;"PAYMENT REFERENCE ID"<br />&emsp;},...<br />]
+**Response OK**|**200** OK<br />[<br />&emsp;{<br /> &emsp;&emsp;**"\_id":**&emsp;"TRANSACTION ID",<br /> &emsp;&emsp;**"profileID":**&emsp;"PROFILE ID",<br /> &emsp;&emsp;**"createdAt":**&emsp;"CREATION DATE",<br /> &emsp;&emsp;**"modifiedAt":**&emsp;"LAST MODIFICATION DATE",<br /> &emsp;&emsp;**"amount":**&emsp;"BALANCE",<br /> &emsp;&emsp;**"orderID":**&emsp;"ORDER ID",<br /> &emsp;&emsp;**"statusCode":**&emsp;"PAYMENT STATUS CODE",<br /> &emsp;&emsp;**"refID":**&emsp;"PAYMENT REFERENCE ID"<br />&emsp;}, ...<br />]
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
