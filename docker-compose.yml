@@ -18,15 +18,15 @@ services:
         ports:
             - "4020:2000"
         restart: always
-#        links:
-#            - mongo
+    #    links:
+    #        - mongo
         depends_on:
             - mongo
 
     account:
         image: memmojtaba/e-shopping-account_management:latest
-        # volumes:
-        #     - "./.env:/account_management/.env"
+    #    volumes:
+    #        - "./.env:/account_management/.env"
         environment: 
             - HOST=213.233.176.195
             - PORT=5000
@@ -39,9 +39,9 @@ services:
         ports:
             - "5000:5000"
         restart: always
-#        links:
-#            - mongo_account
-#            - auth
+    #    links:
+    #        - mongo_account
+    #        - auth
         depends_on:
             - mongo_account
             - auth
