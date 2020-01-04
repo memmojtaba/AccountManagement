@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization;
         const auth_url = 'http://' + (process.env.AUTH_SERVER_ADDR || 'authN') + ':'
-            + (process.env.AUTH_SERVER_PORT || '2000') + '/auth/v1/user/role'
+            + (process.env.AUTH_SERVER_PORT || '2000') + '/authentiq/v1/user/role'
         var options = {
             url: auth_url,
             headers: {
@@ -21,8 +21,8 @@ module.exports = (req, res, next) => {
                 next();
 
             } else {
-                console.log(resp);
-                res.status(resp.statusCode).json(body);
+                 console.log(body);
+                res.status(resp.statusCode).json(JSON.parse(body));
             }
         });
 

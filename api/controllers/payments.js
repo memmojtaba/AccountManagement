@@ -6,7 +6,8 @@ exports.payments_zarinpal_payment = (req, res, next) => {
         var paymentLink = 'https://sandbox.zarinpal.com/pg/StartPay/' + req.paymentAuthority;
         console.log('Redirect to: ' + paymentLink)
         res.redirect(paymentLink);
-    } catch (error) {
+    } catch (err) {
+        console.log(err)
         res.status(500).json({
             message: 'Internal Server Error'
         });

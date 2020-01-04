@@ -3,7 +3,7 @@ const request = require('request');
 module.exports = (req, res, next) => {
     try {
         const auth_url = 'http://' + (process.env.AUTH_SERVER_ADDR || 'authN') + ':'
-            + (process.env.AUTH_SERVER_PORT || '2000') + '/auth/v1/user/login'
+            + (process.env.AUTH_SERVER_PORT || '2000') + '/authentiq/v1/user/login'
         var options = {
             url: auth_url,
             json: {

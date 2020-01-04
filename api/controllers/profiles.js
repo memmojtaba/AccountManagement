@@ -18,14 +18,13 @@ exports.profiles_create_profile = (req, res, next) => {
         .then(result => {
             console.log(result);
             res.status(201).json({
-                // message: "saved successfully.",
                 token: req.token
             });
         })
         .catch(err => {
             console.log(err);
-            res.status(401).json({
-                message: err.message
+            res.status(500).json({
+                message: 'Internal Server Error'
             });
             console.log(req.token);
         });
@@ -59,7 +58,7 @@ exports.profiles_update_profile = (req, res, next) => {
     }
     if (invalid === true) {
         res.status(400).json({
-            message: 'Invalid Parameters.'
+            message: 'Invalid Parameters'
         });
         return;
     }
@@ -88,18 +87,24 @@ exports.profiles_get_profile = (req, res, next) => {
     Profile.find({ 'email': req.email })
         .select('_id email name phoneNo nationalCode address postalCode')
         .exec()
-        .then(doc => {
-            console.log('From database:' + doc[0]);
-            if (doc) {
-                res.status(200).json(doc[0]);
+        .then(profile => {
+            console.log('From database:' + profile[0]);
+            if (profile) {
+                res.status(200).json(profile[0]);
             } else {
                 res.status(404).json({
-                    message: 'No valid content for provided ID.'
+                    message: 'Email Not Found'
                 });
             }
         })
         .catch(err => {
             console.log(err);
+<<<<<<< HEAD
             res.status(500).json({ message: 'Internal Server Error' });
+=======
+            res.status(500).json({
+                message: 'Internal Server Error'
+            });
+>>>>>>> master
         });
 }

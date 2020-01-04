@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+    db:
+        image: mongo:latest
+        ports:
+            - "27017:27017"
+        restart: always
+
+    mongo_account:
+        image: mongo:latest
+        ports:
+            - "27018:27017"
+        restart: always
+
+    auth:
+        image: sayid/authentiq:latest
+        ports:
+            - "4020:2000"
+        restart: always
+    #    links:
+    #        - db
+        depends_on:
+            - db
+
+    account:
+        image: memmojtaba/e-shopping-account_management:latest
+    #    volumes:
+    #        - "./.env:/account_management/.env"
+        environment: 
+            - HOST=213.233.176.195
+            - PORT=5000
+            - AUTH_SERVER_ADDR=auth
+            - AUTH_SERVER_PORT=2000
+            - MONGO_SERVER_ADDR=mongo_account
+            - MONGO_SERVER_PORT=27017
+            - PAYMENT_SERVER_URL='https://sandbox.zarinpal.com/pg/services/WebGate/wsdl'
+            - MERCHANT_ID='XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+        ports:
+            - "5000:5000"
+        restart: always
+    #    links:
+    #        - mongo_account
+    #        - auth
+        depends_on:
+            - mongo_account
+            - auth
