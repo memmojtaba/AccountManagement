@@ -1,14 +1,16 @@
 module.exports = (req, res, next) => {
     try {
         var soap = require('soap');
+        const amount = '10000'; //from Trade Management service (orderID)
+        const description = 'تراکنش آزمایشی'; //from Trade Management service (orderID)
         const payment_url = process.env.PAYMENT_URL
             || 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
         const callback_url = 'http://' + (process.env.HOST || 'localhost') + ':' +
-        (process.env.PORT || '8080') + '/account/pay/callback/' + req.transactionID + '/';
+        (process.env.PORT || '5000') + '/account/pay/callback/' + req.transactionID + '/';
         var options = {
             MerchantID: process.env.MERCHANT_ID || 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-            Amount: '10000', //from Trade Management service (orderID)
-            Description: 'تراکنش آزمایشی', //from Trade Management service (orderID)
+            Amount: amount,
+            Description: description,
             Email: req.email,
             Mobile: '',
             CallbackURL: callback_url
