@@ -99,12 +99,8 @@ exports.profiles_get_profile = (req, res, next) => {
         })
         .catch(err => {
             console.log(err);
-<<<<<<< HEAD
-            res.status(500).json({ message: 'Internal Server Error' });
-=======
             res.status(500).json({
                 message: 'Internal Server Error'
             });
->>>>>>> master
         });
 }
