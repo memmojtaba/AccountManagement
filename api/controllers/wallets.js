@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 const Wallet = require('../models/wallet');
 const Profile = require('../models/profile');
 
@@ -21,22 +19,22 @@ exports.wallets_get_wallet = (req, res, next) => {
                             });
                         } else {
                             res.status(404).json({
-                                message: 'Invalid parameters.'
+                                message: 'Invalid Parameters.'
                             });
                         }
                     })
                     .catch(err => {
                         console.log(err);
-                        res.status(500).json({ message: 'Internal server error' });
+                        res.status(500).json({ message: 'Internal Server Error' });
                     });
             } else {
                 res.status(404).json({
-                    message: 'Invalid parameters.'
+                    message: 'Invalid Parameters.'
                 });
             }
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ message: 'Internal server error' });
+            res.status(500).json({ message: 'Internal Server Error' });
         });
 }
