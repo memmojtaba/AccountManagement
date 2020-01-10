@@ -19,7 +19,7 @@ exports.wallets_get_wallet = (req, res, next) => {
                                 value: wallets[0].value
                             });
                         } else {
-                            res.status(404).json({
+                            res.status(400).json({
                                 message: 'Invalid Parameters.'
                             });
                         }
@@ -29,7 +29,7 @@ exports.wallets_get_wallet = (req, res, next) => {
                         res.status(500).json({ message: 'Internal Server Error' });
                     });
             } else {
-                res.status(404).json({
+                res.status(400).json({
                     message: 'Invalid Parameters.'
                 });
             }
@@ -57,7 +57,7 @@ exports.wallets_get_wallet_next = (req, res, next) => {
                             req.walletID = wallets[0]._id
                             next();
                         } else {
-                            res.status(404).json({
+                            res.status(400).json({
                                 message: 'Invalid Parameters.'
                             });
                         }
@@ -67,7 +67,7 @@ exports.wallets_get_wallet_next = (req, res, next) => {
                         res.status(500).json({ message: 'Internal Server Error' });
                     });
             } else {
-                res.status(404).json({
+                res.status(400).json({
                     message: 'Invalid Parameters.'
                 });
             }

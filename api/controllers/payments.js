@@ -1,10 +1,7 @@
-const Wallet = require('../models/wallet');
-const Transaction = require('../models/transaction');
-
 exports.payments_zarinpal_payment = (req, res, next) => {
     try {
         var paymentLink = 'https://sandbox.zarinpal.com/pg/StartPay/' + req.paymentAuthority;
-        console.log('Redirect to: ' + paymentLink)
+        console.log('Redirected to: ' + paymentLink)
         res.redirect(paymentLink);
     } catch (err) {
         console.log(err)

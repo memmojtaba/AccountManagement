@@ -17,7 +17,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Preventing CORS errors
+//Preventing CORS (Cross-Origin Resource Sharing) errors
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header(

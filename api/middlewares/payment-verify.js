@@ -1,6 +1,7 @@
+const soap = require('soap');
+
 module.exports = (req, res, next) => {
     try {
-        var soap = require('soap');
         const amount = '10000'; //from Trade Management service (orderID)
         const payment_url = process.env.PAYMENT_URL
             || 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
