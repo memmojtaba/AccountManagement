@@ -1,4 +1,4 @@
-From node:13.5.0-alpine
+FROM node:13.5.0-alpine
 
 MAINTAINER mem.mojtaba@gmail.com
 
