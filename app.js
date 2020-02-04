@@ -32,11 +32,11 @@ app.use((req, res, next) => {
 });
 
 //Routes which should handle requests
-app.use('/account/heartbeat', heartbeatRoutes);
-app.use('/account/profile', profileRoutes);
-app.use('/account/wallet', walletRoutes);
-app.use('/account/transaction', transactionRoutes);
-app.use('/account/pay', paymentRoutes);
+app.use('/accountico/heartbeat', heartbeatRoutes);
+app.use('/accountico/profile', profileRoutes);
+app.use('/accountico/wallet', walletRoutes);
+app.use('/accountico/transaction', transactionRoutes);
+app.use('/accountico/pay', paymentRoutes);
 
 //Connect to MongoDB with mongoose
 if (env.process.DB_USER && env.process.DB_PASS){
