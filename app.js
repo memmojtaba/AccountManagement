@@ -39,9 +39,11 @@ app.use('/account/transaction', transactionRoutes);
 app.use('/account/pay', paymentRoutes);
 
 //Connect to MongoDB with mongoose
-const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
-    (process.env.MONGO_SERVER_PORT || '27017') + '/account'
-mongoose.connect(connectionString,
+if (env.process.DB_USER && env.process.DB_PASS){
+    const connectionString = 'mongodb://' + env.process.DB_USER + ':' + env.process.DB_PASS +
+        '@' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
+        (process.env.MONGO_SERVER_PORT || '27017') + '/account'
+    mongoose.connect(connectionString,
     {
         useUnifiedTopology: true,
         useNewUrlParser: true,
@@ -53,8 +55,27 @@ mongoose.connect(connectionString,
         })
     })
     
-mongoose.Promise = global.Promise;
-console.log(connectionString);
+    mongoose.Promise = global.Promise;
+    console.log(connectionString);
+} else{
+    const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
+    (process.env.MONGO_SERVER_PORT || '27017') + '/account'
+    mongoose.connect(connectionString,
+    {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        // useMongoClient: true
+    })
+    .catch(err => {
+        res.status(500).json({
+            message: 'Internal Server Error'
+        })
+    })
+    
+    mongoose.Promise = global.Promise;
+    console.log(connectionString);
+}
+
 //Error handling
 app.use((req, res, next) => {
     const error = Error('Not found!');
