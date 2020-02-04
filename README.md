@@ -13,6 +13,8 @@ In order to run this as a service and probably develop on top of it, you’ll ne
   * `AUTH_SERVER_PORT` : Working port of Authentication Service
   * `MONGO_SERVER_ADDR` : Address of MongoDB
   * `MONGO_SERVER_PORT` : Working port of MongoDB
+  * `DB_USER` : Username for connecting to MongoDB
+  * `DB_PASS` : Password for connecting to MongoDB
   * `PAYMENT_SERVER_URL` : Address of Payment SOAP Service
   * `MERCHANT_ID` : An ID received from Zarinpal
   
@@ -41,7 +43,7 @@ This is used to check if the service is up.
 
 HTTP Method|GET
 :-----|:-----
-**URL**|/account/heartbeat
+**URL**|/accountico/heartbeat
 **Request Body**|empty
 **Response OK**|**200** OK
 **Response Error**|No response
@@ -52,7 +54,7 @@ This is used to create a profile.
 
 HTTP Method|POST
 :-----|:-----
-**URL**|/account/profile
+**URL**|/accountico/profile
 **Request Body**|{<br /> &emsp;**"email":**&emsp;"A VALID EMAIL ADDRESS",<br /> &emsp;**"password":**&emsp;"A VALID PASSWORD",<br /> &emsp;"name":&emsp;"A NAME",<br /> &emsp;"phoneNo":&emsp;"A PHONE NUMBER",<br /> &emsp;"nationalCode":&emsp;"A NATIONAL CODE",<br /> &emsp;"address":&emsp;"AN ADDRESS",<br /> &emsp;"postalCode":&emsp;"A POSTAL CODE"<br />}
 **Response OK**|**201** CREATED<br />{<br /> &emsp;**token:**&emsp;"A VALID AUTHORIZATION TOKEN"<br />}
 **Response Error**|**400** Invalid Parameters<br />**409** Email Already Exists<br />**500** Internal Server Error
@@ -63,9 +65,9 @@ This is used to update a profile. The acquired token must be provided in Authori
 
 HTTP Method|PUT
 :-----|:-----
-**URL**|/account/profile
+**URL**|/accountico/profile
 **Request Body**|{<br /> &emsp;**"name":**&emsp;"A NAME",<br /> &emsp;**"phoneNo":**&emsp;"A PHONE NUMBER",<br /> &emsp;**"nationalCode"**:&emsp;"A NATIONAL CODE",<br /> &emsp;**"address":**&emsp;"AN ADDRESS",<br /> &emsp;**"postalCode":**&emsp;"A POSTAL CODE"<br />}
-**Response OK**|**200** OK<br />{<br /> &emsp;**"\_id":**&emsp;"PROFILE ID",<br /> &emsp;**"email":**&emsp;"AN EMAIL",<br /> &emsp;**"name":**&emsp;"A NAME",<br /> &emsp;**"phoneNo":**&emsp;"A PHONE NUMBER",<br /> &emsp;**"nationalCode":**&emsp;"A NATIONAL CODE",<br /> &emsp;**"address":**&emsp;"AN ADDRESS",<br /> &emsp;**"postalCode":**&emsp;"A POSTAL CODE"<br />}
+**Response OK**|**200** OK<br />{<br /> &emsp;**"id":**&emsp;"PROFILE ID",<br /> &emsp;**"email":**&emsp;"AN EMAIL",<br /> &emsp;**"name":**&emsp;"A NAME",<br /> &emsp;**"phoneNo":**&emsp;"A PHONE NUMBER",<br /> &emsp;**"nationalCode":**&emsp;"A NATIONAL CODE",<br /> &emsp;**"address":**&emsp;"AN ADDRESS",<br /> &emsp;**"postalCode":**&emsp;"A POSTAL CODE"<br />}
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
 
 -----
@@ -74,9 +76,9 @@ This is used to get a profile. The acquired token must be provided in Authorizat
 
 HTTP Method|GET
 :-----|:-----
-**URL**|/account/profile
+**URL**|/accountico/profile
 **Request Body**|empty
-**Response OK**|**200** OK<br />{<br /> &emsp;**"\_id":**&emsp;"PROFILE ID",<br /> &emsp;**"email":**&emsp;"AN EMAIL",<br /> &emsp;**"name":**&emsp;"A NAME",<br /> &emsp;**"phoneNo":**&emsp;"A PHONE NUMBER",<br /> &emsp;**"nationalCode":**&emsp;"A NATIONAL CODE",<br /> &emsp;**"address":**&emsp;"AN ADDRESS",<br /> &emsp;**"postalCode":**&emsp;"A POSTAL CODE"<br />}
+**Response OK**|**200** OK<br />{<br /> &emsp;**"id":**&emsp;"PROFILE ID",<br /> &emsp;**"email":**&emsp;"AN EMAIL",<br /> &emsp;**"name":**&emsp;"A NAME",<br /> &emsp;**"phoneNo":**&emsp;"A PHONE NUMBER",<br /> &emsp;**"nationalCode":**&emsp;"A NATIONAL CODE",<br /> &emsp;**"address":**&emsp;"AN ADDRESS",<br /> &emsp;**"postalCode":**&emsp;"A POSTAL CODE"<br />}
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
 
 -----
@@ -85,7 +87,7 @@ This is used to get a wallet value of the profile. The acquired token must be pr
 
 HTTP Method|GET
 :-----|:-----
-**URL**|/account/wallet
+**URL**|/accountico/wallet
 **Request Body**|empty
 **Response OK**|**200** OK<br />{<br /> &emsp;**"value":**&emsp;"WALLET VALUE",<br />}
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
@@ -96,7 +98,7 @@ This is used to make a payment by calling the Zarinpal payment gateway and then 
 
 HTTP Method|POST
 :-----|:-----
-**URL**|/account/pay
+**URL**|/accountico/pay
 **Request Body**|{<br /> &emsp;**"orderID":**&emsp;"A VALID ORDER ID",<br />}
 **Response OK**|**302** MOVED TEMPORARILY
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
@@ -107,7 +109,7 @@ This is used to return to Account Management Service from the payment gateway. T
 
 HTTP Method|POST
 :-----|:-----
-**URL**|/account/pay/callback
+**URL**|/accountico/pay/callback
 **Request Body**|empty
 **Response OK**|**200** OK
 **Response Error**|**400** Invalid Parameters<br />**500** Internal Server Error
@@ -118,7 +120,7 @@ This is used to get a list of all transactions of a profile. The acquired token 
 
 HTTP Method|GET
 :-----|:-----
-**URL**|/account/transaction
+**URL**|/accountico/transaction
 **Request Body**|empty
-**Response OK**|**200** OK<br />[<br />&emsp;{<br /> &emsp;&emsp;**"\_id":**&emsp;"TRANSACTION ID",<br /> &emsp;&emsp;**"profileID":**&emsp;"PROFILE ID",<br /> &emsp;&emsp;**"createdAt":**&emsp;"CREATION DATE",<br /> &emsp;&emsp;**"modifiedAt":**&emsp;"LAST MODIFICATION DATE",<br /> &emsp;&emsp;**"amount":**&emsp;"BALANCE",<br /> &emsp;&emsp;**"orderID":**&emsp;"ORDER ID",<br /> &emsp;&emsp;**"statusCode":**&emsp;"PAYMENT STATUS CODE",<br /> &emsp;&emsp;**"refID":**&emsp;"PAYMENT REFERENCE ID"<br />&emsp;}, ...<br />]
+**Response OK**|**200** OK<br />[<br />&emsp;{<br /> &emsp;&emsp;**"id":**&emsp;"TRANSACTION ID",<br /> &emsp;&emsp;**"profileID":**&emsp;"PROFILE ID",<br /> &emsp;&emsp;**"createdAt":**&emsp;"CREATION DATE",<br /> &emsp;&emsp;**"modifiedAt":**&emsp;"LAST MODIFICATION DATE",<br /> &emsp;&emsp;**"amount":**&emsp;"BALANCE",<br /> &emsp;&emsp;**"orderID":**&emsp;"ORDER ID",<br /> &emsp;&emsp;**"statusCode":**&emsp;"PAYMENT STATUS CODE",<br /> &emsp;&emsp;**"refID":**&emsp;"PAYMENT REFERENCE ID"<br />&emsp;}, ...<br />]
 **Response Error**|**400** Invalid Parameters<br />**401** Invalid Token<br />**403** Invalid / Expired Session<br />**404** Email Not Found<br />**500** Internal Server Error
