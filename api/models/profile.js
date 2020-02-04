@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const profileSchema = mongoose.Schema({
-    _id: {
+    id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         unique: true

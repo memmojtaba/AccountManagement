@@ -5,7 +5,7 @@ const Wallet = require('../models/wallet');
 
 exports.profiles_create_profile = (req, res, next) => {
     const profile = new Profile({
-        _id: new mongoose.Types.ObjectId(),
+        id: new mongoose.Types.ObjectId(),
         email: req.body.email,
         name: req.body.name,
         phoneNo: req.body.phoneNo,
@@ -18,7 +18,7 @@ exports.profiles_create_profile = (req, res, next) => {
         .then(result => {
             console.log(result);
             res.status(201).json({
-                token: req.token
+                //token: req.token
             });
         })
         .catch(err => {
@@ -26,11 +26,10 @@ exports.profiles_create_profile = (req, res, next) => {
             res.status(500).json({
                 message: 'Internal Server Error'
             });
-            console.log(req.token);
         });
 
     const wallet = new Wallet({
-        _id: new mongoose.Types.ObjectId(),
+        id: new mongoose.Types.ObjectId(),
         profileID: profile.id,
         value: 0
     });
@@ -85,7 +84,7 @@ exports.profiles_update_profile = (req, res, next) => {
 
 exports.profiles_get_profile = (req, res, next) => {
     Profile.find({ 'email': req.email })
-        .select('_id email name phoneNo nationalCode address postalCode')
+        .select('id email name phoneNo nationalCode address postalCode')
         .exec()
         .then(profile => {
             console.log('From database:' + profile[0]);
