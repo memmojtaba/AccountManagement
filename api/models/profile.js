@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
 const profileSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        unique: true
+    },
     email: {
         type: String,
         required: true,
-        unique: true, //Not a validator but can use for readability
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
     name: String,
