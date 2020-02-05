@@ -1,6 +1,8 @@
 FROM node:13.5.0-alpine
 
-MAINTAINER mem.mojtaba@gmail.com
+LABEL MAINTAINER="Mojtaba M <mem.mojtaba@gmail.com>"
+
+RUN apk add --update --no-cache npm curl
 
 WORKDIR /account_management
 
