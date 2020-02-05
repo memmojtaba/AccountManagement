@@ -39,10 +39,10 @@ app.use('/accountico/transaction', transactionRoutes);
 app.use('/accountico/pay', paymentRoutes);
 
 //Connect to MongoDB with mongoose
-if (env.process.DB_USER && env.process.DB_PASS){
-    const connectionString = 'mongodb://' + env.process.DB_USER + ':' + env.process.DB_PASS +
+if (process.env.DB_USER && process.env.DB_PASS){
+    const connectionString = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS +
         '@' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
-        (process.env.MONGO_SERVER_PORT || '27017') + '/account'
+        (process.env.MONGO_SERVER_PORT || '27017') + '/accountico'
     mongoose.connect(connectionString,
     {
         useUnifiedTopology: true,
@@ -59,7 +59,7 @@ if (env.process.DB_USER && env.process.DB_PASS){
     console.log(connectionString);
 } else{
     const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
-    (process.env.MONGO_SERVER_PORT || '27017') + '/account'
+    (process.env.MONGO_SERVER_PORT || '27017') + '/accountico'
     mongoose.connect(connectionString,
     {
         useUnifiedTopology: true,
