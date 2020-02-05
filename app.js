@@ -42,7 +42,7 @@ app.use('/accountico/pay', paymentRoutes);
 if (process.env.DB_USER && process.env.DB_PASS){
     const connectionString = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS +
         '@' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
-        (process.env.MONGO_SERVER_PORT || '27017') + '/accountico'
+        (process.env.MONGO_SERVER_PORT || '27017') + '/accountico?authSource=admin'
     mongoose.connect(connectionString,
     {
         useUnifiedTopology: true,
