@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = mongoose.Schema({
-    id: mongoose.Schema.Types.ObjectId,
+    _id: mongoose.Schema.Types.ObjectId,
     profileID: { type: mongoose.Schema.Types.ObjectId, ref:'Profile', required: true },
     createdAt: { type: Date, required: true },
     modifiedAt: Date,

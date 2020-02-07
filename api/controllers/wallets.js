@@ -4,7 +4,7 @@ const Transaction = require('../models/transaction');
 
 exports.wallets_get_wallet = (req, res, next) => {
     Profile.find({ 'email': req.email })
-        .select('id')
+        .select('_id')
         .exec()
         .then(profile => {
             console.log('Profile: ' + profile[0]);
@@ -41,14 +41,14 @@ exports.wallets_get_wallet = (req, res, next) => {
 }
 
 exports.wallets_get_wallet_next = (req, res, next) => {
-    Transaction.find({ 'id': req.params.transactionID })
+    Transaction.find({ '_id': req.params.transactionID })
         .select('profileID')
         .exec()
         .then(transaction => {
             console.log('Transaction: ' + transaction[0]);
             if (transaction) {
                 Wallet.find({ profileID: transaction[0].profileID })
-                    .select('value id')
+                    .select('value _id')
                     .exec()
                     .then(wallets => {
                         console.log('Wallet value: ' + wallets[0]);

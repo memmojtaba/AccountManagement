@@ -5,7 +5,7 @@ const Wallet = require('../models/wallet');
 
 exports.profiles_create_profile = (req, res, next) => {
     const profile = new Profile({
-        id: new mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(),
         email: req.body.email,
         name: req.body.name,
         phoneNo: req.body.phoneNo,
@@ -84,7 +84,7 @@ exports.profiles_update_profile = (req, res, next) => {
 
 exports.profiles_get_profile = (req, res, next) => {
     Profile.find({ 'email': req.email })
-        .select('id email name phoneNo nationalCode address postalCode')
+        .select('_id email name phoneNo nationalCode address postalCode')
         .exec()
         .then(profile => {
             console.log('From database:' + profile[0]);

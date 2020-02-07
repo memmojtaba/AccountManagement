@@ -5,13 +5,13 @@ const Profile = require('../models/profile');
 
 exports.transactions_get_transaction = (req, res, next) => {
     Profile.find({ 'email': req.email })
-        .select('id')
+        .select('_id')
         .exec()
         .then(profile => {
             console.log('Found from Profile: ' + profile[0]);
             if (profile) {
-                Transaction.find({ profileID: profile[0].id })
-                    .select('id profileID createdAt modifiedAt amount orderID statusCode refID')
+                Transaction.find({ profileID: profile[0]._id })
+                    .select('_id profileID createdAt modifiedAt amount orderID statusCode refID')
                     .exec()
                     .then(transactions => {
                         console.log('Found from Transaction: ' + transactions);
@@ -45,7 +45,7 @@ exports.transactions_get_transaction = (req, res, next) => {
 
 exports.transactions_insert_transaction = (req, res, next) => {
     Profile.find({ 'email': req.email })
-        .select('id')
+        .select('_id')
         .exec()
         .then(profile => {
             console.log('Found from Profile: ' + profile[0]);
