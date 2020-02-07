@@ -29,8 +29,8 @@ exports.profiles_create_profile = (req, res, next) => {
         });
 
     const wallet = new Wallet({
-        id: new mongoose.Types.ObjectId(),
-        profileID: profile.id,
+        _id: new mongoose.Types.ObjectId(),
+        profileID: profile._id,
         value: 0
     });
     wallet

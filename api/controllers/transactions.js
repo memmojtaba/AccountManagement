@@ -51,8 +51,8 @@ exports.transactions_insert_transaction = (req, res, next) => {
             console.log('Found from Profile: ' + profile[0]);
             if (profile) {
                 var transaction = new Transaction({
-                    id: new mongoose.Types.ObjectId(),
-                    profileID: profile[0].id,
+                    _id: new mongoose.Types.ObjectId(),
+                    profileID: profile[0]._id,
                     createdAt: new Date().getTime(),
                     amount: '10000', //from Trade Management service (orderID)
                     orderID: req.body.orderID
@@ -62,7 +62,7 @@ exports.transactions_insert_transaction = (req, res, next) => {
                     .then(result => {
                         console.log(result);
                         if (result) {
-                            req.transactionID = transaction.id;
+                            req.transactionID = transaction._id;
                             next();
                         } else {
                             res.status(400).json({
@@ -96,7 +96,7 @@ exports.transactions_update_transaction = (req, res, next) => {
         refID: req.paymentRefID
     }
     console.log(updateOps);
-    Transaction.updateOne({ id: req.params.transactionID }, { $set: updateOps })
+    Transaction.updateOne({ _id: req.params.transactionID }, { $set: updateOps })
         .exec()
         .then(result => {
             console.log(result);

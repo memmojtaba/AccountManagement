@@ -9,7 +9,7 @@ exports.wallets_get_wallet = (req, res, next) => {
         .then(profile => {
             console.log('Profile: ' + profile[0]);
             if (profile) {
-                Wallet.find({ profileID: profile[0].id })
+                Wallet.find({ profileID: profile[0]._id })
                     .select('value')
                     .exec()
                     .then(wallets => {
@@ -54,7 +54,7 @@ exports.wallets_get_wallet_next = (req, res, next) => {
                         console.log('Wallet value: ' + wallets[0]);
                         if (wallets) {
                             req.walletValue = wallets[0].value
-                            req.walletID = wallets[0].id
+                            req.walletID = wallets[0]._id
                             next();
                         } else {
                             res.status(400).json({
@@ -83,7 +83,7 @@ exports.wallets_update_wallet = (req, res, next) => {
         updateOps = {
             value: Number(req.walletValue) + Number(req.amount)
         }
-        Wallet.updateOne({ id: req.walletID }, { $set: updateOps })
+        Wallet.updateOne({ _id: req.walletID }, { $set: updateOps })
             .exec()
             .then(result => {
                 next();
