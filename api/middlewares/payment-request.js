@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
         const payment_url = process.env.PAYMENT_URL
             || 'https://sandbox.zarinpal.com/pg/services/WebGate/wsdl';
         const callback_url = 'http://' + (process.env.HOST || 'localhost') + ':' +
-            (process.env.PORT || '5000') + '/account/pay/callback/' + req.transactionID + '/';
+            (process.env.PORT || '5000') + '/accountico/pay/callback/' + req.transactionID + '/';
         var options = {
             MerchantID: process.env.MERCHANT_ID || 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
             Amount: amount,
