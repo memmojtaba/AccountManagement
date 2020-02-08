@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const profileSchema = mongoose.Schema({
-    _id: {
+    _id: mongoose.Schema.Types.ObjectId,
+    userID: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         unique: true

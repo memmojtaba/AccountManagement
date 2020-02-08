@@ -16,7 +16,8 @@ module.exports = (req, res, next) => {
         request(options, (err, resp, body) => {
             if (resp.statusCode === 201) {
                 console.log(body);
-                //req.token = body.token;
+                // req.token = body.token;
+                req.userID = body.user.userID;
                 next();
 
             } else {
