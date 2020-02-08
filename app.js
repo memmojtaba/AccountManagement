@@ -39,41 +39,43 @@ app.use('/accountico/transaction', transactionRoutes);
 app.use('/accountico/pay', paymentRoutes);
 
 //Connect to MongoDB with mongoose
-if (process.env.DB_USER && process.env.DB_PASS){
-    const connectionString = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS +
-        '@' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
-        (process.env.MONGO_SERVER_PORT || '27017') + '/accountico?authSource=admin'
-    mongoose.connect(connectionString,
-    {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-        // useMongoClient: true
-    })
-    .catch(err => {
+if (process.env.DB_USER && process.env.DB_PASS) {
+    try {
+        const connectionString = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS +
+            '@' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
+            (process.env.MONGO_SERVER_PORT || '27017') + '/accountico?authSource=admin'
+        console.log(connectionString);
+        mongoose.connect(connectionString,
+            {
+                useUnifiedTopology: false,
+                useNewUrlParser: true,
+                // useMongoClient: true
+            })
+    } catch (err) {
         res.status(500).json({
             message: 'Internal Server Error'
         })
-    })
-    
+        
+    }
     mongoose.Promise = global.Promise;
-    console.log(connectionString);
-} else{
-    const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
-    (process.env.MONGO_SERVER_PORT || '27017') + '/accountico'
-    mongoose.connect(connectionString,
-    {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-        // useMongoClient: true
-    })
-    .catch(err => {
+} else {
+    try {
+        const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
+            (process.env.MONGO_SERVER_PORT || '27017') + '/accountico'
+        console.log(connectionString);
+        mongoose.connect(connectionString,
+            {
+                useUnifiedTopology: false,
+                useNewUrlParser: true,
+                // useMongoClient: true
+            })
+    } catch (err) {
         res.status(500).json({
             message: 'Internal Server Error'
         })
-    })
-    
+        
+    }
     mongoose.Promise = global.Promise;
-    console.log(connectionString);
 }
 
 //Error handling
