@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
                 next();
 
             } else {
-                res.status(resp.statusCode).json(body);
+                res.status(resp.statusCode).json(JSON.parse(body));
             }
         });
 
