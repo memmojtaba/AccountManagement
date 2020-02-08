@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const TransactionsController = require('../controllers/transactions');
-const getRole = require('../middlewares/get-role');
+const validate = require('../middlewares/check-auth');
 
-router.get('/', getRole, TransactionsController.transactions_get_transaction);
+router.get('/', validate, TransactionsController.transactions_get_transaction);
 
 module.exports = router;

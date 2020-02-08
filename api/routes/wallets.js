@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const WalletsController = require('../controllers/wallets');
-const getRole = require('../middlewares/get-role');
+const validate = require('../middlewares/check-auth');
 
-router.get('/', getRole, WalletsController.wallets_get_wallet);
+router.get('/', validate, WalletsController.wallets_get_wallet);
 
 module.exports = router;

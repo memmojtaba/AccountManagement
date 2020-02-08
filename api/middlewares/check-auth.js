@@ -16,6 +16,10 @@ module.exports = (req, res, next) => {
         console.log(options)
         request(options, (err, resp, body) => {
             if (resp.statusCode === 200) {
+                console.log(body);
+                req.userID = JSON.parse(body).userID;
+                req.email = JSON.parse(body).email;
+                req.role = JSON.parse(body).role;
                 next();
 
             } else {
