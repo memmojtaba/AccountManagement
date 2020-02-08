@@ -40,41 +40,35 @@ app.use('/accountico/pay', paymentRoutes);
 
 //Connect to MongoDB with mongoose
 if (process.env.DB_USER && process.env.DB_PASS) {
-    try {
-        const connectionString = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS +
-            '@' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
-            (process.env.MONGO_SERVER_PORT || '27017') + '/accountico?authSource=admin'
-        console.log(connectionString);
-        mongoose.connect(connectionString,
-            {
-                useUnifiedTopology: false,
-                useNewUrlParser: true,
-                // useMongoClient: true
-            })
-    } catch (err) {
-        res.status(500).json({
-            message: 'Internal Server Error'
+    const connectionString = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS +
+        '@' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
+        (process.env.MONGO_SERVER_PORT || '27017') + '/accountico?authSource=admin'
+    console.log(connectionString);
+    mongoose.connect(connectionString,
+        {
+            // useUnifiedTopology: false,
+            useNewUrlParser: true,
+            // useMongoClient: true
         })
-        
-    }
+        .catch(err => {
+            console.log(err.message)
+            process.exit(1)
+        })
     mongoose.Promise = global.Promise;
 } else {
-    try {
-        const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
-            (process.env.MONGO_SERVER_PORT || '27017') + '/accountico'
-        console.log(connectionString);
-        mongoose.connect(connectionString,
-            {
-                useUnifiedTopology: false,
-                useNewUrlParser: true,
-                // useMongoClient: true
-            })
-    } catch (err) {
-        res.status(500).json({
-            message: 'Internal Server Error'
+    const connectionString = 'mongodb://' + (process.env.MONGO_SERVER_ADDR || 'mongo') + ':' +
+        (process.env.MONGO_SERVER_PORT || '27017') + '/accountico'
+    console.log(connectionString);
+    mongoose.connect(connectionString,
+        {
+            useUnifiedTopology: false,
+            useNewUrlParser: true,
+            // useMongoClient: true
         })
-        
-    }
+        .catch(err => {
+            console.log(err.message)
+            process.exit(1)
+        })
     mongoose.Promise = global.Promise;
 }
 
