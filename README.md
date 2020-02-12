@@ -15,6 +15,7 @@ In order to run this as a service and probably develop on top of it, you’ll ne
   * `MONGO_SERVER_PORT` : Working port of MongoDB
   * `DB_USER` : Username for connecting to MongoDB
   * `DB_PASS` : Password for connecting to MongoDB
+  * `CALLBACK_URL` : URL for redirect after Payment callback
   * `PAYMENT_SERVER_URL` : Address of Payment SOAP Service
   * `MERCHANT_ID` : An ID received from Zarinpal
   
